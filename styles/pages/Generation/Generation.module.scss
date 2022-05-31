@@ -1,0 +1,110 @@
+@import '../../includes/variables';
+@import '../../includes/placeholders';
+
+.list {
+  @extend %list;
+
+  min-height: calc(100vh - ($header-height + $footer-height + 10rem));
+  grid-template-columns: 1fr;
+  place-items: center;
+  place-content: center;
+
+  @include md {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 4rem 8rem;
+  }
+}
+
+.list_item {
+  @extend %list_item;
+  position: relative;
+  background: linear-gradient(0, hsl(0, 0%, 100%) 50%, hsl(0, 80%, 45%) 50%);
+  border-radius: 50%;
+  color: #000;
+  width: 16rem;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.5rem solid;
+  box-shadow: inset -15px 5px 0.5rem hsla(0, 0, 0, 0.5);
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    pointer-events: none;
+  }
+
+  &:before {
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 0.5em;
+    background-color: #000;
+  }
+
+  &::after {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 0.5em solid;
+    border-radius: 50%;
+    outline: 1.25rem solid;
+    outline-offset: -1.5em;
+    width: 6em;
+    aspect-ratio: 1;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      animation: shake 1.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+
+      &:after {
+        animation: blink 0.5s alternate infinite;
+      }
+    }
+  }
+
+  a {
+    height: 100%;
+    width: 100%;
+    position: relative;
+
+    span {
+      position: absolute;
+      bottom: 3rem;
+    }
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(0, 0) rotate(0);
+  }
+  20% {
+    transform: translate(-10px, 0) rotate(-20deg);
+  }
+  30% {
+    transform: translate(10px, 0) rotate(20deg);
+  }
+  50% {
+    transform: translate(-10px, 0) rotate(-10deg);
+  }
+  60% {
+    transform: translate(10px, 0) rotate(10deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0);
+  }
+}
+
+@keyframes blink {
+  from {
+    background: #eee;
+  }
+  to {
+    background: #e74c3c;
+  }
+}

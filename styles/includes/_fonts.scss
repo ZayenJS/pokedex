@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: 'pokemon';
+  src: url('/fonts/pokemon/pokemon.eot');
+  src: url('/fonts/pokemon/pokemon.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/pokemon/pokemon.woff') format('woff'),
+    url('/fonts/pokemon/pokemon.ttf') format('truetype'),
+    url('/fonts/pokemon/pokemon.svg#pokemon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[data-icon]:before {
+  font-family: 'pokemon' !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^='pika-']:before,
+[class*=' pika-']:before {
+  font-family: 'pokemon' !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.pika-volume-up:before {
+  content: '\e100';
+}
+.pika-volume-off:before {
+  content: '\e101';
+}

@@ -1,0 +1,16 @@
+@import '../../../styles/includes/variables';
+
+.container {
+  min-height: 100vh;
+  display: grid;
+  grid-template-areas: 'header' 'main' 'footer';
+  grid-template-rows: $header-height auto $footer-height;
+
+  main {
+    padding-inline: 2rem;
+
+    @include md {
+      padding-inline: 8rem;
+    }
+  }
+}

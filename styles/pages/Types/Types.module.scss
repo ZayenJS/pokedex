@@ -1,0 +1,19 @@
+@import '../../includes/variables';
+@import '../../includes/placeholders';
+
+.list {
+  @extend %list;
+  gap: 2rem;
+
+  @include xl {
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  }
+}
+
+.list_item {
+  @extend %list_item;
+
+  a {
+    padding: 1.5rem;
+  }
+}

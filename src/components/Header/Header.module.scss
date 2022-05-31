@@ -1,0 +1,73 @@
+@import '../../../styles/includes/variables';
+
+.container {
+  @include flex(center, center);
+
+  h1 {
+    $shadow-thickness: 3px;
+    $text-color: #fdcb04;
+    $text-bg: #3b5aa6;
+
+    font-family: 'Pokemon Solid', sans-serif;
+    font-size: 2.5rem;
+    color: $text-color;
+
+    text-shadow: $shadow-thickness 0 0 $text-bg, -$shadow-thickness 0 0 $text-bg,
+      0 $shadow-thickness 0 $text-bg, 0 -$shadow-thickness 0 $text-bg,
+      calc($shadow-thickness / 2) calc($shadow-thickness / 2) $text-bg,
+      -(calc($shadow-thickness / 2)) - (calc($shadow-thickness / 2)) 0 $text-bg,
+      calc($shadow-thickness / 2) - (calc($shadow-thickness / 2)) 0 $text-bg,
+      -(calc($shadow-thickness / 2)) 1px 0 $text-bg;
+  }
+
+  > div {
+    @include flex(center, space-between);
+    width: 100%;
+    padding-inline: 8rem;
+  }
+
+  ul {
+    @include flex(center, center);
+    gap: 1rem;
+  }
+}
+
+.volume {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 200;
+  color: white;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+}
+
+.search_form {
+  display: flex;
+  font-size: 1.25rem;
+
+  input {
+    font-size: inherit;
+    border: none;
+    padding: 0.5rem;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom: 2px solid #fff;
+  }
+
+  button {
+    border: none;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    min-width: 3rem;
+    background-color: #fdcb04;
+    color: #3b5aa6;
+  }
+}
+
+.list {
+  font-size: 1.5rem;
+  color: #fdcb04;
+  padding-block-end: 0.25rem;
+}

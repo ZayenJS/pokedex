@@ -1,0 +1,25 @@
+@import './variables';
+
+%list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 4rem;
+  padding-block: 4rem;
+}
+
+%list_item {
+  border-radius: 0.25rem;
+  overflow: hidden;
+
+  a {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+}
