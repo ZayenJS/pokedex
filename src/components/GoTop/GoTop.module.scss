@@ -1,0 +1,24 @@
+@import '../../../styles/includes/variables';
+
+.container {
+  @include flex(center, center);
+  cursor: pointer;
+  font-size: 2.5rem;
+  font-weight: bold;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 10;
+  width: 2.5rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  color: $text-bg;
+  background-color: $text-color;
+  box-shadow: 0 0 0.5rem 0.1rem $text-bg;
+  transform: translateY(8rem);
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  &.visible {
+    transform: translateY(0);
+  }
+}

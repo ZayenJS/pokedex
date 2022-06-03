@@ -4,7 +4,12 @@ import { useAppDispatch } from '../../store';
 import { fetchPokemons } from '../../store/actions';
 import { State } from '../../store/reducers';
 
-export const usePokemons = (limit = 50) => {
+interface UsePokemonParams {
+  limit?: number;
+  id?: number;
+}
+
+export const usePokemons = ({ limit = 50, id }: UsePokemonParams = {}) => {
   const { pokemons } = useSelector((state: State) => state);
   const dispatch = useAppDispatch();
 

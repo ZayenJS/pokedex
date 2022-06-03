@@ -3,13 +3,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
 import { PokemonTypeColor } from '../constants';
+import Input from '../src/components/Input/Input';
 import Loader from '../src/components/Loader/Loader';
 import { usePokemons } from '../src/hooks/usePokemons';
+import { useTypes } from '../src/hooks/useTypes';
 
 import styles from '../styles/pages/Home/Home.module.scss';
 
 const Home: FC = () => {
-  const { pokemons, fetching } = usePokemons();
+  const { pokemons, fetching: fetchingPokemons } = usePokemons();
+  const { types, fetching: fetchingTypes } = useTypes();
 
   const allPokemons = pokemons?.map((pokemon: any) => {
     const color1 = PokemonTypeColor[pokemon.types[0].en as keyof typeof PokemonTypeColor];
@@ -57,25 +60,32 @@ const Home: FC = () => {
         <meta name="description" content="simple pokedex app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* TODO: filter */}
-      <form className={styles.filter_form}>
-        <div>
-          <input type="checkbox" />
-          <label>Feu</label>
-        </div>
-        <div>
-          <input type="checkbox" />
-          <label>Vol</label>
-        </div>
-        <div>
-          <input type="checkbox" />
-          <label>Eau</label>
-        </div>
-      </form>
+      {allPokemons.length ? (
+        <>
+          <form className={styles.filter_form}>
+            {types?.map((type) => (
+              <Input
+                key={`type-${type.en.toLowerCase()}`}
+                className={{ input: styles[type.en.toLowerCase()] }}
+                data={{
+                  input: {
+                    'data-color': PokemonTypeColor[type.en as keyof typeof PokemonTypeColor],
+                  },
+                }}
+                name={type.en}
+                type="checkbox"
+                reducer={'types'}
+                id={type.id.toString()}
+                label={type.fr}
+              />
+            ))}
+          </form>
 
-      <ul className={styles.list}>{allPokemons}</ul>
+          <ul className={styles.list}>{allPokemons}</ul>
+        </>
+      ) : null}
 
-      <Loader fetching={fetching} />
+      <Loader fetching={fetchingPokemons} />
     </div>
   );
 };

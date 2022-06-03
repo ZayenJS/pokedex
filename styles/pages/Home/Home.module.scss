@@ -28,7 +28,10 @@
 }
 
 .filter_form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  place-items: start;
+  margin: auto;
   padding-block-start: 2rem;
-  display: flex;
   gap: 1rem;
 }

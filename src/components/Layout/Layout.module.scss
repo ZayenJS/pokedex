@@ -6,11 +6,27 @@
   grid-template-areas: 'header' 'main' 'footer';
   grid-template-rows: $header-height auto $footer-height;
 
+  header {
+    grid-area: header;
+    position: fixed;
+    height: $header-height;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-color: $poke-red;
+    z-index: 100;
+  }
+
   main {
+    grid-area: main;
     padding-inline: 2rem;
 
     @include md {
       padding-inline: 8rem;
     }
+  }
+
+  footer {
+    grid-area: footer;
   }
 }
