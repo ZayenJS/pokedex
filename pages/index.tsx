@@ -1,7 +1,8 @@
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
-import { FC } from 'react';
+import { useRouter } from 'next/router';
+import { FC, useEffect } from 'react';
 import { PokemonTypeColor } from '../constants';
 import Input from '../src/components/Input/Input';
 import Loader from '../src/components/Loader/Loader';
@@ -10,48 +11,36 @@ import { useTypes } from '../src/hooks/useTypes';
 
 import styles from '../styles/pages/Home/Home.module.scss';
 
+const PokemonCardComponent = dynamic(() => import('../src/components/PokemonCard/PokemonCard'));
+
 const Home: FC = () => {
-  const { pokemons, fetching: fetchingPokemons } = usePokemons();
-  const { types, fetching: fetchingTypes } = useTypes();
+  const { pokemons, totalPokemons, fetching: fetchingPokemons, fetchPokemons } = usePokemons();
+  const { types } = useTypes();
 
-  const allPokemons = pokemons?.map((pokemon: any) => {
-    const color1 = PokemonTypeColor[pokemon.types[0].en as keyof typeof PokemonTypeColor];
-    const color2 = pokemon.types[1]
-      ? PokemonTypeColor[pokemon.types[1].en as keyof typeof PokemonTypeColor]
-      : color1;
+  let nbPages = null;
 
-    const types = pokemon.types
-      .map((t: { fr: string; en: string }) => (
-        <span
-          key={`${pokemon.id}-${t.en}`}
-          className={styles.type}
-          style={{ color: PokemonTypeColor[t.en as keyof typeof PokemonTypeColor] }}>
-          {t.fr}
-        </span>
-      ))
-      .reduce((acc: any, curr: any) => [...acc, acc.length ? ', ' : '', curr], []);
+  const router = useRouter();
+  const currentPage = router.query.page ? +router.query.page : 1;
 
-    return (
-      <li key={pokemon.id} className={styles.list_item}>
-        <div
-          style={{
-            background: 'none',
-            border: `4px solid`,
-            borderImageSlice: 1,
-            borderImageSource: `linear-gradient(90deg, ${color1}, ${color2})`,
-          }}>
-          <span className={styles.number}>#{pokemon.id}</span>
-          <Link href={`/pokemon/${pokemon.id}`} key={pokemon.name}>
-            <a>
-              <img src={pokemon.sprites.front_default} alt="" />
-              <strong>{pokemon.name}</strong>
-            </a>
+  useEffect(() => {
+    fetchPokemons(currentPage * 100);
+  }, [currentPage]);
+
+  if (totalPokemons) nbPages = Math.ceil(totalPokemons / 100);
+
+  let allPages = null;
+  if (nbPages) {
+    const pages = Array.from({ length: nbPages }, (_, i) => i + 1);
+    allPages = pages.map((page) => {
+      return (
+        <li key={page} className={styles.list_item}>
+          <Link href={`/?page=${page}`} key={page}>
+            <a>{page}</a>
           </Link>
-          <p>types: {types}</p>
-        </div>
-      </li>
-    );
-  });
+        </li>
+      );
+    });
+  }
 
   return (
     <div className={styles.container}>
@@ -60,7 +49,7 @@ const Home: FC = () => {
         <meta name="description" content="simple pokedex app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {allPokemons.length ? (
+      {pokemons.length && !fetchingPokemons ? (
         <>
           <form className={styles.filter_form}>
             {types?.map((type) => (
@@ -81,7 +70,12 @@ const Home: FC = () => {
             ))}
           </form>
 
-          <ul className={styles.list}>{allPokemons}</ul>
+          <ul className={styles.list}>
+            {pokemons.map((pokemon) => (
+              <PokemonCardComponent pokemon={pokemon} key={pokemon.id} />
+            ))}
+          </ul>
+          <ul className={styles.pagination_container}>{allPages}</ul>
         </>
       ) : null}
 

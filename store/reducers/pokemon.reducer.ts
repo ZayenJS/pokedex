@@ -1,15 +1,17 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { Pokemon } from '../../models/Pokemon';
-import { fetchPokemons } from '../actions';
+import { fetchPokemons, fetchTotalPokemonCount } from '../actions';
 
 export interface PokemonState {
   fetching: boolean;
   all: Pokemon[];
+  totalCount: number | null;
 }
 
 const INITIAL_STATE: PokemonState = {
   fetching: false,
   all: [],
+  totalCount: null,
 };
 
 export const pokemonReducer = createReducer(INITIAL_STATE, (builder) =>
@@ -22,7 +24,9 @@ export const pokemonReducer = createReducer(INITIAL_STATE, (builder) =>
 
       state.fetching = false;
 
-      const oldPokemons = [...state.all];
-      state.all = [...new Set([oldPokemons, action.payload.pokemons].flat())];
+      state.all = action.payload.pokemons;
+    })
+    .addCase(fetchTotalPokemonCount.fulfilled, (state, action) => {
+      state.totalCount = action.payload.totalPokemonCount;
     }),
 );

@@ -31,8 +31,6 @@ export const getAllTypes = async () => {
         },
         type: { type_id: number; name: string; language_id: number },
       ) => {
-        console.log({ type });
-
         const { type_id, name, language_id } = type;
 
         const lang = language_id === 5 ? 'fr' : 'en';

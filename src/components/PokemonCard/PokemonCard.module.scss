@@ -1,0 +1,22 @@
+@import '../../../styles/includes/placeholders';
+
+.list_item {
+  @extend %list_item;
+
+  div {
+    position: relative;
+    padding: 1rem;
+  }
+}
+
+.number {
+  font-weight: bold;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+
+.type {
+  font-weight: 600;
+  font-size: 1.1rem;
+}

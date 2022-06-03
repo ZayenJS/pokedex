@@ -39,11 +39,11 @@ export const getAllPokemons = async (limit: number, offset?: number) => {
         const { name } = data.pokemon_v2_pokemonspecy.pokemon_v2_pokemonspeciesnames[0];
         // sprites: JSON.parse(data.pokemon_v2_pokemonsprites.sprites[0]), // does not work -> api is full of null values ??
         const sprites = {
-          //     /**
-          //      * The graphql endpoint seems buggy,
-          //      * so i had to use the pokemon.sprites.front_default link
-          //      * returned by the REST API
-          //      */
+          /**
+           * The graphql endpoint seems buggy,
+           * so i had to use the pokemon.sprites.front_default link
+           * returned by the REST API
+           */
           front_default: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id}.png`,
         };
         const types = data.pokemon_v2_pokemontypes.map((type: any) => ({
@@ -61,10 +61,22 @@ export const getAllPokemons = async (limit: number, offset?: number) => {
   return result;
 };
 
+export const getTotalPokemonCount = async () => {
+  const query = `query TotalPokemonCount {
+    pokemon_v2_pokemonspecies_aggregate {
+      aggregate {
+        count(columns: name)
+      }
+    }
+  }`;
+
+  return (await gqlClient.request(query)).pokemon_v2_pokemonspecies_aggregate.aggregate.count;
+};
+
 export const getPokemonsByType = async (type: string) => {};
 
 export const getPokemonsByGeneration = async (
-  generation: string,
+  generationId: number,
   limit: number,
   offset?: number,
 ) => {
@@ -75,11 +87,11 @@ export const getPokemonsByGeneration = async (
       Accept: 'application/json',
     },
     body: JSON.stringify({
-      query: `query AllPokemonsByGeneration($limit: Int, $offset: Int) {
+      query: `query AllPokemonsByGeneration($generation_id: Int, $limit: Int, $offset: Int) {
         pokemon_v2_pokemon {
           id
           pokemon_v2_pokemonspecy {
-            pokemon_v2_pokemonspeciesnames(where: {language_id: {_eq: 5}, pokemon_v2_pokemonspecy: {generation_id: {_eq: 1}}}) {
+            pokemon_v2_pokemonspeciesnames(where: {language_id: {_eq: 5}, pokemon_v2_pokemonspecy: {generation_id: {_eq: $generation_id}}}) {
               name
             }
           }
@@ -89,7 +101,7 @@ export const getPokemonsByGeneration = async (
         }
       }`,
       variables: {
-        generation,
+        generation_id: generationId,
         limit,
         offset: offset ?? 0,
       },

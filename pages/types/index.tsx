@@ -11,7 +11,7 @@ const Types: FC = () => {
 
   const allTypes = types.map((type) => {
     return (
-      <li className={styles.list_item}>
+      <li key={type.id} className={styles.list_item}>
         <Link href={`/types/${type.id}`} key={type.fr}>
           <a style={{ backgroundColor: type.color }}>{type.fr}</a>
         </Link>

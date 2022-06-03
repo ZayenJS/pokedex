@@ -45,45 +45,40 @@ const Header: FC<HeaderProps> = () => {
   }, []);
 
   return (
-    <>
-      <Head>
-        <link href="http://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet" />
-      </Head>
-      <header className={styles.container}>
-        <div>
-          <h1>
-            <Link href="/">
-              <a>PokeWiki</a>
-            </Link>
-          </h1>
-          <form className={styles.search_form} onSubmit={onSearchHandler}>
-            <input value={search} onChange={onInputChangeHandler} type="search" />
-            <button type="submit">R</button>
-          </form>
-          <nav>
-            <ul className={styles.list}>
-              <li>
-                <Link href="/">Liste</Link>
-              </li>
-              <li>
-                <Link href="/generations">Générations</Link>
-              </li>
-              <li>
-                <Link href="/types">Types</Link>
-              </li>
-            </ul>
-          </nav>
-          <button
-            title={volume > 0 ? 'Désactiver la musique' : 'Activer la musique'}
-            className={`${styles.volume} ${volume > 0 ? 'pika-volume-up' : 'pika-volume-off'}`}
-            onClick={toggleMusic}
-          />
-          <audio ref={audioRef}>
-            <source src="/pokemon-opening.mp3" />
-          </audio>
-        </div>
-      </header>
-    </>
+    <header className={styles.container}>
+      <div>
+        <h1>
+          <Link href="/">
+            <a>PokeWiki</a>
+          </Link>
+        </h1>
+        <form className={styles.search_form} onSubmit={onSearchHandler}>
+          <input value={search} onChange={onInputChangeHandler} type="search" />
+          <button type="submit">R</button>
+        </form>
+        <nav>
+          <ul className={styles.list}>
+            <li>
+              <Link href="/">Liste</Link>
+            </li>
+            <li>
+              <Link href="/generations">Générations</Link>
+            </li>
+            <li>
+              <Link href="/types">Types</Link>
+            </li>
+          </ul>
+        </nav>
+        <button
+          title={volume > 0 ? 'Désactiver la musique' : 'Activer la musique'}
+          className={`${styles.volume} ${volume > 0 ? 'pika-volume-up' : 'pika-volume-off'}`}
+          onClick={toggleMusic}
+        />
+        <audio ref={audioRef}>
+          <source src="/pokemon-opening.mp3" />
+        </audio>
+      </div>
+    </header>
   );
 };
 

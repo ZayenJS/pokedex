@@ -6,27 +6,6 @@
   min-height: calc(100vh - ($header-height + $footer-height + 10rem));
 }
 
-.list_item {
-  @extend %list_item;
-
-  div {
-    position: relative;
-    padding: 1rem;
-  }
-}
-
-.number {
-  font-weight: bold;
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
-}
-
-.type {
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-
 .filter_form {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
