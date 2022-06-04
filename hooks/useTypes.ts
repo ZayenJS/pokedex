@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../../store';
-import { fetchTypes } from '../../store/actions';
-import { State } from '../../store/reducers';
+import { useAppDispatch } from '../store';
+import { fetchTypes } from '../store/actions';
+import { State } from '../store/reducers';
 
 export const useTypes = () => {
   const types = useSelector((state: State) => state.types);

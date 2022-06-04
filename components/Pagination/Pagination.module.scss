@@ -1,0 +1,33 @@
+@import '../../styles/includes/variables';
+
+.container {
+  @include flex(center, center, row wrap);
+  gap: 1rem;
+  padding-block-start: 4rem;
+}
+
+.item {
+  @include flex(center, center);
+  padding-block-end: 0.25rem;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+
+  &.active {
+    border-bottom: 3px solid $text-color;
+  }
+
+  &.disabled {
+    color: #666;
+    cursor: not-allowed;
+
+    a {
+      pointer-events: none;
+    }
+  }
+
+  a {
+    @include flex(center, center);
+    padding-inline: 0.4rem;
+  }
+}

@@ -1,21 +1,20 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../../store';
-import { fetchPokemons, fetchTotalPokemonCount } from '../../store/actions';
-import { State } from '../../store/reducers';
+import { ITEMS_PER_PAGE } from '../constants';
+import { useAppDispatch } from '../store';
+import { fetchPokemons } from '../store/actions';
+import { State } from '../store/reducers';
 
 interface UsePokemonParams {
   limit?: number;
-  id?: number;
 }
 
-export const usePokemons = ({ limit = 100, id }: UsePokemonParams = {}) => {
+export const usePokemons = ({ limit = ITEMS_PER_PAGE }: UsePokemonParams = {}) => {
   const { pokemons } = useSelector((state: State) => state);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (!pokemons.all.length && !pokemons.fetching) {
-      dispatch(fetchTotalPokemonCount());
       dispatch(
         fetchPokemons({
           limit,

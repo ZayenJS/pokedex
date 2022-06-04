@@ -1,5 +1,5 @@
-import { FC, useEffect } from 'react';
-import { PropsInterface } from '../../../@types/PropsInterface';
+import { FC } from 'react';
+import { PropsInterface } from '../../@types/PropsInterface';
 import Footer from '../Footer/Footer';
 import GoTop from '../GoTop/GoTop';
 import Header from '../Header/Header';

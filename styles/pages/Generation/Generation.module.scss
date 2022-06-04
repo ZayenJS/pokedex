@@ -4,7 +4,6 @@
 .list {
   @extend %list;
 
-  min-height: calc(100vh - ($header-height + $footer-height + 10rem));
   grid-template-columns: 1fr;
   place-items: center;
   place-content: center;

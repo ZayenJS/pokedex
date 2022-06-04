@@ -1,4 +1,4 @@
-import { PokemonTypeColor } from '../constants';
+import { PokemonTypeColor } from '../@types/PokemonTypeColor';
 
 export interface PokemonType {
   id: number;

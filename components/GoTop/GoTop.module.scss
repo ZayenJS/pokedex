@@ -1,4 +1,4 @@
-@import '../../../styles/includes/variables';
+@import '../../styles/includes/variables';
 
 .container {
   @include flex(center, center);
@@ -16,9 +16,16 @@
   background-color: $text-color;
   box-shadow: 0 0 0.5rem 0.1rem $text-bg;
   transform: translateY(8rem);
-  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
   &.visible {
     transform: translateY(0);
+  }
+
+  &:hover {
+    color: lighten($text-bg, 10%);
+    box-shadow: 0 0 0.5rem 0.2rem lighten($text-bg, 10%);
+    transform: translateY(0) scale(1.1);
   }
 }

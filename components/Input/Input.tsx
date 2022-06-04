@@ -1,6 +1,6 @@
 import { ChangeEvent, FC } from 'react';
-import { GenericObject } from '../../../@types';
-import { State } from '../../../store/reducers';
+import { GenericObject } from '../../@types';
+import { State } from '../../store/reducers';
 import { useInput } from '../../hooks/useInput';
 
 import styles from './Input.module.scss';

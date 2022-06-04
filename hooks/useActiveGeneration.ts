@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../../store';
-import { setActiveGeneration } from '../../store/actions';
-import { State } from '../../store/reducers';
+import { useAppDispatch } from '../store';
+import { setActiveGeneration } from '../store/actions';
+import { State } from '../store/reducers';
 
 export const useActiveGeneration = (generationId: number | null) => {
   const { generations } = useSelector((state: State) => state);

@@ -1,0 +1,30 @@
+@import '../../styles/includes/variables';
+
+.container {
+  @include flex(center, center);
+  background-color: #444;
+  font-size: 1.1rem;
+}
+
+.external_link {
+  position: relative;
+  color: hsl(220, 70%, 75%);
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    &:before {
+      width: 100%;
+    }
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: hsl(220, 70%, 75%);
+    transition: all 0.2s ease-in-out;
+  }
+}

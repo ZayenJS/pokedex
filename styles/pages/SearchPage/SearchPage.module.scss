@@ -1,0 +1,6 @@
+@import '../../includes/variables';
+@import '../../includes/placeholders';
+
+.list {
+  @extend %list;
+}

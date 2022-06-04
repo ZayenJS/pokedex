@@ -1,7 +1,7 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ChangeEvent, FC, FormEvent, useEffect, useRef, useState } from 'react';
+import { usePokemonSearch } from '../../hooks/usePokemonSearch';
 
 import styles from './Header.module.scss';
 
@@ -11,6 +11,7 @@ const Header: FC<HeaderProps> = () => {
   const [search, setSearch] = useState('');
   const [volume, setVolume] = useState(0);
   const router = useRouter();
+  const { search: searchPokemon } = usePokemonSearch('');
 
   const onInputChangeHandler = (event: ChangeEvent) => {
     setSearch((event.target as HTMLInputElement).value);
@@ -18,8 +19,10 @@ const Header: FC<HeaderProps> = () => {
 
   const onSearchHandler = (event: FormEvent) => {
     event.preventDefault();
+    if (!search) return;
 
     router.push(`/recherche?q=${search}`);
+    searchPokemon(search);
     setSearch('');
   };
 
@@ -49,11 +52,16 @@ const Header: FC<HeaderProps> = () => {
       <div>
         <h1>
           <Link href="/">
-            <a>PokeWiki</a>
+            <a>PokéWiki</a>
           </Link>
         </h1>
         <form className={styles.search_form} onSubmit={onSearchHandler}>
-          <input value={search} onChange={onInputChangeHandler} type="search" />
+          <input
+            value={search}
+            placeholder="Rechercher un pokémon..."
+            onChange={onInputChangeHandler}
+            type="search"
+          />
           <button type="submit">R</button>
         </form>
         <nav>

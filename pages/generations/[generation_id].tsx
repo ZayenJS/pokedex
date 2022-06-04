@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
 import { FC } from 'react';
-import Loader from '../../src/components/Loader/Loader';
-import { useActiveGeneration } from '../../src/hooks/useActiveGeneration';
-import { useGenerations } from '../../src/hooks/useGenerations';
+import Loader from '../../components/Loader/Loader';
+import { useActiveGeneration } from '../../hooks/useActiveGeneration';
+import { useGenerations } from '../../hooks/useGenerations';
+import { usePokemons } from '../../hooks/usePokemons';
 
 const GenerationNumber: FC = () => {
   const router = useRouter();

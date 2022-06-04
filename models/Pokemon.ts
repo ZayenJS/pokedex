@@ -7,6 +7,11 @@ interface PokemonSprites {
 export interface Pokemon {
   id: number;
   name: string;
+  generation?: string;
   types: PokemonType[];
   sprites: PokemonSprites;
+  descriptions?: string[];
+  isLegendary?: boolean;
+  isMythical?: boolean;
+  isBaby?: boolean;
 }

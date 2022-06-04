@@ -1,4 +1,5 @@
-import { GRAPHQL_API_URL, PokemonTypeColor } from '../constants';
+import { PokemonTypeColor } from '../@types/PokemonTypeColor';
+import { GRAPHQL_API_URL } from '../constants';
 
 export const getAllTypes = async () => {
   const response = await fetch(GRAPHQL_API_URL, {

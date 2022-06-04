@@ -1,7 +1,7 @@
 import '../styles/index.scss';
 import type { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import Layout from '../src/components/Layout/Layout';
+import Layout from '../components/Layout/Layout';
 
 import { store } from '../store';
 import { Provider } from 'react-redux';

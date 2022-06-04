@@ -1,4 +1,4 @@
-@import '../../../styles/includes/variables';
+@import '../../styles/includes/variables';
 
 .container {
   min-height: 100vh;
@@ -20,6 +20,7 @@
   main {
     grid-area: main;
     padding-inline: 2rem;
+    padding-block: 4rem;
 
     @include md {
       padding-inline: 8rem;

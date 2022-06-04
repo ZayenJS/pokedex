@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import { FC } from 'react';
-import { PokemonTypeColor } from '../../../constants';
-import { Pokemon } from '../../../models/Pokemon';
+import { PokemonTypeColor } from '../../@types/PokemonTypeColor';
+import { Pokemon } from '../../models/Pokemon';
 
-import styles from './PokemonCard.module.scss';
+import styles from './PokemonListItem.module.scss';
 
-export interface PokemonCardProps {
+export interface PokemonListItemProps {
   pokemon: Pokemon;
 }
 
-const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
+const PokemonListItem: FC<PokemonListItemProps> = ({ pokemon }) => {
   const color1 = PokemonTypeColor[pokemon.types[0].en as keyof typeof PokemonTypeColor];
   const color2 = pokemon.types[1]
     ? PokemonTypeColor[pokemon.types[1].en as keyof typeof PokemonTypeColor]
@@ -38,7 +38,7 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
         <span className={styles.number}>#{pokemon.id}</span>
         <Link href={`/pokemon/${pokemon.id}`} key={pokemon.name}>
           <a>
-            <img src={pokemon.sprites.front_default} alt="" />
+            <img src={pokemon.sprites.front_default} alt={`représentation de ${pokemon.name}`} />
             <strong>{pokemon.name}</strong>
           </a>
         </Link>
@@ -48,4 +48,4 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
   );
 };
 
-export default PokemonCard;
+export default PokemonListItem;

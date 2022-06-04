@@ -5,3 +5,13 @@ export interface FetchPokemonsPayload {
   offset?: number;
   pokemons?: Pokemon[];
 }
+
+export interface FetchPokemonByIdPayload {
+  id: number | null;
+  pokemon?: Pokemon;
+}
+
+export interface SearchPokemonsPayload {
+  search: string;
+  searchResult?: Pokemon[];
+}

@@ -4,12 +4,12 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 4rem;
-  padding-block: 4rem;
 }
 
 %list_item {
   border-radius: 0.25rem;
   overflow: hidden;
+  max-width: 25rem;
 
   a {
     position: relative;

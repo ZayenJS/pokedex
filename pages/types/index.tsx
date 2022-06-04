@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { FC } from 'react';
-import Loader from '../../src/components/Loader/Loader';
-import { useTypes } from '../../src/hooks/useTypes';
+import Loader from '../../components/Loader/Loader';
+import { useTypes } from '../../hooks/useTypes';
 
 import styles from '../../styles/pages/Types/Types.module.scss';
 

@@ -1,4 +1,4 @@
-@import '../../../styles/includes/placeholders';
+@import '../../styles/includes/placeholders';
 
 .list_item {
   @extend %list_item;
@@ -17,6 +17,7 @@
 }
 
 .type {
-  font-weight: 600;
+  font-weight: bold;
+  font-style: italic;
   font-size: 1.1rem;
 }

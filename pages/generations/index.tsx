@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { FC } from 'react';
-import Loader from '../../src/components/Loader/Loader';
-import { useGenerations } from '../../src/hooks/useGenerations';
+import Loader from '../../components/Loader/Loader';
+import { useGenerations } from '../../hooks/useGenerations';
 
 import styles from '../../styles/pages/Generation/Generation.module.scss';
 
