@@ -1,0 +1,24 @@
+@import '../../includes/variables';
+
+.container {
+  @include flex(center, center, column nowrap);
+
+  p {
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.5;
+    font-size: 1.25rem;
+
+    @include lg {
+      font-size: 2rem;
+    }
+  }
+}
+
+.image {
+  position: relative;
+  max-width: 40rem;
+  width: 100%;
+  aspect-ratio: 1;
+}

@@ -1,11 +1,21 @@
-@import '../../styles/includes/placeholders';
+@import '../../../styles/includes/placeholders';
 
 .list_item {
   @extend %list_item;
 
   div {
+    @include flex($flex-flow: column nowrap, $justify: space-around);
     position: relative;
     padding: 1rem;
+    height: 100%;
+
+    a {
+      @include flex(center, space-between, column nowrap);
+    }
+
+    img {
+      width: 7rem;
+    }
   }
 }
 

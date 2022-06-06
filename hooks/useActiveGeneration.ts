@@ -9,7 +9,6 @@ export const useActiveGeneration = (generationId: number | null) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log(generationId);
     if (!generations.activeGeneration && generations.all.length > 0) {
       dispatch(setActiveGeneration({ generationId }));
     }

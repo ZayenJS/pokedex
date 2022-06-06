@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { FC } from 'react';
+import GoTop from '../../components/GoTop/GoTop';
 import Loader from '../../components/Loader/Loader';
 import { useTypes } from '../../hooks/useTypes';
 
@@ -24,8 +25,9 @@ const Types: FC = () => {
       <Head>
         <title>PokeWiki - Types</title>
       </Head>
-      <ul className={styles.list}>{allTypes}</ul>
       <Loader fetching={fetching} />
+      <ul className={styles.list}>{allTypes}</ul>
+      <GoTop />
     </>
   );
 };

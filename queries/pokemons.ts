@@ -1,16 +1,28 @@
+import { GenericObject } from '../@types';
 import { PokemonTypeColor } from '../@types/PokemonTypeColor';
 import { gqlClient, GRAPHQL_API_URL } from '../constants';
 import { Pokemon } from '../models/Pokemon';
 import { PokemonType } from '../models/Type';
 
-export const getAllPokemons = async (limit: number, offset?: number) => {
+export const getAllPokemons = async (
+  limit: number,
+  offset?: number,
+  where: GenericObject<any> = {},
+) => {
+  const jsonWhere = Object.keys(where).length
+    ? `where: ${JSON.stringify(where).replace(/"/g, '')}`
+    : '';
+
   const query = `query AllPokemons($limit: Int, $offset: Int) {
-          pokemon_v2_pokemon(limit: $limit, offset: $offset) {
+          pokemon_v2_pokemon(limit: $limit, offset: $offset${
+            jsonWhere ? ',' : ''
+          }${jsonWhere}, order_by: { id: asc }) {
             id
             pokemon_v2_pokemonspecy {
               pokemon_v2_pokemonspeciesnames(where: { language_id: { _eq: 5 } }) {
                 name
               }
+              generation_id
             }
             pokemon_v2_pokemonsprites {
               sprites
@@ -24,7 +36,7 @@ export const getAllPokemons = async (limit: number, offset?: number) => {
               }
             }
           }
-          pokemon_v2_pokemonspecies_aggregate {
+          pokemon_v2_pokemon_aggregate${jsonWhere ? '(' + jsonWhere + ')' : ''} {
             aggregate {
               count(columns: name)
             }
@@ -71,8 +83,8 @@ export const getAllPokemons = async (limit: number, offset?: number) => {
       });
     }
 
-    if (apiData.pokemon_v2_pokemonspecies_aggregate) {
-      result.count = apiData.pokemon_v2_pokemonspecies_aggregate.aggregate.count;
+    if (apiData.pokemon_v2_pokemon_aggregate) {
+      result.count = apiData.pokemon_v2_pokemon_aggregate.aggregate.count;
     }
   } catch (err) {
     console.error(err);
@@ -238,8 +250,6 @@ export const getPokemonsByGeneration = async (
   });
 
   const json = await response.json();
-
-  console.log(json);
 
   return json;
 };

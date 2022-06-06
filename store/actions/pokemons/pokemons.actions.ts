@@ -1,4 +1,5 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { GenericObject } from '../../../@types';
 import { getAllPokemons, getPokemonById, searchPokemon } from '../../../queries/pokemons';
 import {
   FetchPokemonByIdPayload,
@@ -10,6 +11,7 @@ export enum PokemonAction {
   FETCH_POKEMONS = 'FETCH_POKEMONS',
   FETCH_POKEMON_BY_ID = 'FETCH_POKEMON_BY_ID',
   SEARCH_POKEMONS = 'SEARCH_POKEMONS',
+  CLEAR_SEARCH = 'CLEAR_SEARCH',
 }
 
 export const fetchPokemons = createAsyncThunk(
@@ -21,7 +23,26 @@ export const fetchPokemons = createAsyncThunk(
         totalPokemons: 0,
       };
     }
-    const result = await getAllPokemons(payload.limit, payload.offset);
+
+    const where: GenericObject<any> = {};
+
+    if (payload.generationId) {
+      where.pokemon_v2_pokemonspecy = {
+        generation_id: { _eq: payload.generationId },
+      };
+    }
+
+    if (payload.typeId) {
+      where.pokemon_v2_pokemontypes = {
+        pokemon_v2_type: {
+          id: {
+            _eq: payload.typeId,
+          },
+        },
+      };
+    }
+
+    const result = await getAllPokemons(payload.limit, payload.offset, where);
 
     return {
       pokemons: result.pokemons,
@@ -48,16 +69,16 @@ export const searchPokemons = createAsyncThunk(
       const result = await searchPokemon(payload.search);
 
       return {
-        searchResult: result,
+        searchResult: result.length ? result : 'Aucuns résultats',
       };
     } catch (error) {
-      console.log('TODO: handle error 500');
-
       return {
         searchResult: [],
       };
     }
   },
 );
+
+export const clearSearch = createAction(PokemonAction.CLEAR_SEARCH);
 
 export type PokemonActionType = ReturnType<typeof fetchPokemons>;

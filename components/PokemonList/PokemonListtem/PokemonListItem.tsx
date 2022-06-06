@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FC } from 'react';
-import { PokemonTypeColor } from '../../@types/PokemonTypeColor';
-import { Pokemon } from '../../models/Pokemon';
+import { PokemonTypeColor } from '../../../@types/PokemonTypeColor';
+import { Pokemon } from '../../../models/Pokemon';
 
 import styles from './PokemonListItem.module.scss';
 

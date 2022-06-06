@@ -1,19 +1,20 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../store';
-import { searchPokemons } from '../store/actions';
+import { clearSearch, searchPokemons } from '../store/actions';
 import { State } from '../store/reducers';
 
 export const usePokemonSearch = (search: string) => {
   const pokemons = useSelector((state: State) => state.pokemons);
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     if (search && !pokemons.searchResult.length) {
       dispatch(searchPokemons({ search }));
     }
 
     return () => {
-      dispatch(searchPokemons({ search: '' }));
+      dispatch(clearSearch());
     };
   }, [search]);
 

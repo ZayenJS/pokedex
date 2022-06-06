@@ -2,14 +2,20 @@
 
 %list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  place-items: center;
+  grid-template-columns: 1fr;
   gap: 4rem;
+
+  @include sm {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
 }
 
 %list_item {
   border-radius: 0.25rem;
   overflow: hidden;
   max-width: 25rem;
+  width: 100%;
 
   a {
     position: relative;

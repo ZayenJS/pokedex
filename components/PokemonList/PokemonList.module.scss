@@ -1,0 +1,12 @@
+@import '../../styles/includes/variables';
+@import '../../styles/includes/placeholders';
+
+.list {
+  @extend %list;
+  min-height: calc(100vh - ($header-height + $footer-height + 10rem));
+}
+
+.empty {
+  font-size: 1.5rem;
+  text-align: center;
+}

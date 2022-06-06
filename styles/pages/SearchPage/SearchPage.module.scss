@@ -1,6 +1,23 @@
 @import '../../includes/variables';
 @import '../../includes/placeholders';
 
+.title {
+  display: block;
+  margin-block-end: 2rem;
+  font-size: 1.1rem;
+  width: 100%;
+  text-align: center;
+
+  @include lg {
+    font-size: 1.5rem;
+  }
+}
+
+.search {
+  font-style: italic;
+  color: $text-color;
+}
+
 .list {
   @extend %list;
 }

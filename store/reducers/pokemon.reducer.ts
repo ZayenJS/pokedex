@@ -1,17 +1,17 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { Pokemon } from '../../models/Pokemon';
-import { fetchPokemonById, fetchPokemons, searchPokemons } from '../actions';
+import { clearSearch, fetchPokemonById, fetchPokemons, searchPokemons } from '../actions';
 
 export interface PokemonState {
   fetching: boolean;
   all: Pokemon[];
   totalCount: number | null;
   single: Pokemon | null;
-  searchResult: Pokemon[];
+  searchResult: Pokemon[] | string;
 }
 
 const INITIAL_STATE: PokemonState = {
-  fetching: false,
+  fetching: true,
   all: [],
   totalCount: null,
   single: null,
@@ -24,8 +24,6 @@ export const pokemonReducer = createReducer(INITIAL_STATE, (builder) =>
       state.fetching = true;
     })
     .addCase(fetchPokemons.fulfilled, (state, action) => {
-      if (!action.payload.pokemons.length || !state.fetching) return;
-
       state.fetching = false;
       state.all = action.payload.pokemons;
       state.totalCount = action.payload.totalPokemons;
@@ -37,10 +35,8 @@ export const pokemonReducer = createReducer(INITIAL_STATE, (builder) =>
       state.fetching = true;
     })
     .addCase(fetchPokemonById.fulfilled, (state, action) => {
-      if (!action.payload.pokemon || !state.fetching) return;
-
       state.fetching = false;
-      state.single = action.payload.pokemon[0];
+      state.single = action.payload.pokemon?.[0] ?? null;
     })
     .addCase(fetchPokemonById.rejected, (state) => {
       state.fetching = false;
@@ -49,9 +45,12 @@ export const pokemonReducer = createReducer(INITIAL_STATE, (builder) =>
       state.fetching = true;
     })
     .addCase(searchPokemons.fulfilled, (state, action) => {
-      if (!action.payload.searchResult || !state.fetching) return;
+      if (!action.payload.searchResult) return;
 
       state.fetching = false;
       state.searchResult = action.payload.searchResult;
+    })
+    .addCase(clearSearch, (state) => {
+      state.searchResult = [];
     }),
 );

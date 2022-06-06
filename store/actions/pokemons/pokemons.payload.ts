@@ -3,6 +3,8 @@ import { Pokemon } from '../../../models/Pokemon';
 export interface FetchPokemonsPayload {
   limit: number;
   offset?: number;
+  generationId?: number;
+  typeId?: number;
   pokemons?: Pokemon[];
 }
 

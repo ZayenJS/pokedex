@@ -7,9 +7,10 @@ export interface PaginationProps {
   nbPages: number;
   currentPage: number;
   pageOffset?: number | null;
+  hrefPrefix?: string | number;
 }
 
-const Pagination: FC<PaginationProps> = ({ nbPages, currentPage, pageOffset }) => {
+const Pagination: FC<PaginationProps> = ({ nbPages, currentPage, pageOffset, hrefPrefix = '' }) => {
   let allPages = null;
 
   const pages = Array.from({ length: nbPages }, (_, i) => i + 1);
@@ -18,7 +19,7 @@ const Pagination: FC<PaginationProps> = ({ nbPages, currentPage, pageOffset }) =
       key="page-start"
       className={`${styles.item}
           ${currentPage === 1 ? styles.disabled : ''}`}>
-      <Link href={`?page=1`}>
+      <Link href={`${hrefPrefix}?page=1`}>
         <a className="pika-step-start" />
       </Link>
     </li>
@@ -29,7 +30,7 @@ const Pagination: FC<PaginationProps> = ({ nbPages, currentPage, pageOffset }) =
       key="page-end"
       className={`${styles.item}
           ${currentPage === nbPages ? styles.disabled : ''}`}>
-      <Link href={`?page=${nbPages}`}>
+      <Link href={`${hrefPrefix}?page=${nbPages}`}>
         <a className="pika-step-end" />
       </Link>
     </li>
@@ -51,7 +52,7 @@ const Pagination: FC<PaginationProps> = ({ nbPages, currentPage, pageOffset }) =
             key={page}
             className={`${styles.item}
           ${currentPage === page ? styles.active : ''}`}>
-            <Link href={`?page=${page}`}>
+            <Link href={`${hrefPrefix}?page=${page}`}>
               <a>{page}</a>
             </Link>
           </li>

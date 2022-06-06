@@ -2,6 +2,8 @@
 
 .container {
   @include flex(center, center);
+  position: relative;
+  background-color: $poke-red;
 
   h1 {
     $shadow-thickness: 3px;
@@ -21,51 +23,130 @@
   > div {
     @include flex(center, space-between);
     width: 100%;
-    padding-inline: 8rem;
+    height: 100%;
+    background-color: inherit;
+    padding-inline: 2rem;
+
+    @include lg {
+      padding-inline: 4rem;
+    }
+
+    @include xl {
+      padding-inline: 8rem;
+    }
+  }
+
+  nav {
+    width: 100%;
+    padding-inline: 2rem;
+
+    @include lg {
+      width: auto;
+      padding-inline: 0;
+    }
   }
 
   ul {
-    @include flex(center, center);
+    @include flex(center, space-between);
     gap: 1rem;
+
+    @include xl {
+      flex-direction: row;
+      width: auto;
+    }
   }
 }
 
-.volume {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 200;
-  color: white;
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
+.search_nav {
+  position: absolute;
+  z-index: -1;
+  @include flex(center, center, column nowrap);
+  gap: 1rem;
+  top: $header-height;
+  left: 0;
+  width: 100%;
+  padding-block: 1rem;
+  $distance: calc($header-height + 2rem);
+  transform: translateY(-$distance);
+  background-color: $poke-red;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  @include lg {
+    position: relative;
+    @include flex(center, space-between, row nowrap);
+    flex: 1;
+    gap: 0;
+    top: auto;
+    left: auto;
+    width: auto;
+    transform: translateY(0);
+    z-index: 0;
+  }
+
+  &.open {
+    transform: translateY(0);
+  }
 }
 
 .search_form {
   display: flex;
-  font-size: 1.15rem;
+  justify-content: center;
+  width: 100%;
+
+  padding-inline: 2rem;
+
+  @include lg {
+    padding-inline: 4rem;
+    font-size: 1.15rem;
+  }
 
   input {
+    width: inherit;
     font-size: inherit;
     border: none;
     padding: 0.5rem;
     border-top-left-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
     border-bottom: 2px solid #fff;
+
+    @include lg {
+      max-width: 40rem;
+    }
   }
 
   button {
+    @include flex(center, center);
     border: none;
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
     min-width: 3rem;
-    background-color: #fdcb04;
-    color: #3b5aa6;
+    background-color: $text-color;
+    color: $text-bg;
+
+    > * {
+      transform: scale(1.25);
+    }
+  }
+}
+
+.volume {
+  position: fixed;
+  top: 0.5rem;
+  right: 0;
+  z-index: 200;
+  color: white;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+
+  @include lg {
+    top: 1rem;
+    right: 1rem;
   }
 }
 
 .list {
   font-size: 1.5rem;
-  color: #fdcb04;
+  color: $text-color;
   padding-block-end: 0.25rem;
 }

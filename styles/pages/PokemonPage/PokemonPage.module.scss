@@ -43,7 +43,7 @@
 }
 
 .checkboxes {
-  @include flex(center, center, row wrap);
+  @include flex(center, center, row);
   gap: 1rem;
   margin-block: 1rem;
   font-size: 1.2rem;

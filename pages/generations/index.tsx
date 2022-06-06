@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { FC } from 'react';
+import GoTop from '../../components/GoTop/GoTop';
 import Loader from '../../components/Loader/Loader';
 import { useGenerations } from '../../hooks/useGenerations';
 
@@ -24,8 +25,9 @@ const Generation: FC = () => {
       <Head>
         <title>PokeWiki - Générations</title>
       </Head>
-      <ul className={styles.list}>{allGenerations}</ul>
       <Loader fetching={fetching} />
+      <ul className={styles.list}>{allGenerations}</ul>
+      <GoTop />
     </>
   );
 };

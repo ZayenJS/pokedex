@@ -7,27 +7,34 @@ import { State } from '../store/reducers';
 
 interface UsePokemonParams {
   limit?: number;
+  generationId?: number;
+  typeId?: number;
 }
 
-export const usePokemons = ({ limit = ITEMS_PER_PAGE }: UsePokemonParams = {}) => {
+export const usePokemons = ({
+  limit = ITEMS_PER_PAGE,
+  generationId,
+  typeId,
+}: UsePokemonParams = {}) => {
   const { pokemons } = useSelector((state: State) => state);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!pokemons.all.length && !pokemons.fetching) {
-      dispatch(
-        fetchPokemons({
-          limit,
-          offset: pokemons.all.length,
-        }),
-      );
-    }
+    dispatch(
+      fetchPokemons({
+        limit,
+        offset: 0,
+        generationId,
+        typeId,
+      }),
+    );
   }, []);
 
   return {
     pokemons: pokemons.all,
     totalPokemons: pokemons.totalCount,
     fetching: pokemons.fetching,
-    fetchPokemons: (offset: number = 0) => dispatch(fetchPokemons({ limit, offset })),
+    fetchPokemons: (offset: number = 0) =>
+      dispatch(fetchPokemons({ limit, offset, generationId, typeId })),
   };
 };
