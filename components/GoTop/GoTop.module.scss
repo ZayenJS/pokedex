@@ -10,7 +10,12 @@
   right: 2rem;
   z-index: 10;
   width: 2.5rem;
+
   aspect-ratio: 1;
+  @supports not (aspect-ratio: 1) {
+    height: 2.5rem;
+  }
+
   border-radius: 50%;
   color: $text-bg;
   background-color: $text-color;

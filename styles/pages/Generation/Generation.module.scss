@@ -21,7 +21,12 @@
   border-radius: 50%;
   color: #000;
   width: 16rem;
+
   aspect-ratio: 1;
+  @supports not (aspect-ratio: 1) {
+    height: 16rem;
+  }
+
   display: flex;
   align-items: center;
   justify-content: center;

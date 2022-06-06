@@ -3,7 +3,12 @@
 .container {
   @include flex(center, space-between, column nowrap);
   width: 2.5rem;
+
   aspect-ratio: 16/9;
+  @supports not (aspect-ratio: 16/9) {
+    height: 1.4rem;
+  }
+
   border: none;
   cursor: pointer;
   background-color: transparent;
