@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { FC, useCallback } from 'react';
 import Loader from '../../components/Loader/Loader';
@@ -29,8 +30,13 @@ const PokemonPage: FC = () => {
     ))
     .reduce((acc: any, curr: any) => [...acc, acc.length ? ' et ' : '', curr], []);
 
+  const title = pokemon ? `- ${pokemon.name}` : '';
+
   return (
     <>
+      <Head>
+        <title>PokeWiki {title}</title>
+      </Head>
       <Loader fetching={fetching} />
       {!fetching && pokemon && (
         <div className={styles.container}>
